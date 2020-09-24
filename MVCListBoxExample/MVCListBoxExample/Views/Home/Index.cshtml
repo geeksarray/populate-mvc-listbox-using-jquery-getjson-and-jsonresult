@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+<a href="http://dotnetmentors.com"><img src="http://dotnetmentors.com/images/dotnetmentors.png" alt="dotnetmentors.com" /></a>
+
+<div style="margin:25px;">
+    <div>
+        <h2>Fill MVC ListBox using jQuery getJSON and JSONResult</h2>
+    </div>
+    <div>
+        <b>Categories</b>
+    </div>
+    <div>
+        @Html.ListBox("Categories", new SelectList(new[] { "" }), new { @class = "list-group", @style = "width: 150px; height:150px; margin:15px;" })
+    </div>
+</div>
+
+
+<script type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $.getJSON('Categories.txt', function (data) {
+            console.clear();
+            console.log(data);
+            console.log(data.d);
+
+            //clear the current content of the select
+            $('#Categories').empty();
+            //iterate over the data and append a select option
+            $.each(data, function (i, item) {
+                $('#Categories').append('<option value="' + item.CategoryID + '">' + item.CategoryName + '</option>');
+            })
+        });
+        
+
+        //$.getJSON('home/GetCategories/', function (data) {
+
+        //    //clear the current content of the select
+        //    $('#Categories').empty();
+        //    //iterate over the data and append a select option
+
+        //    $.each(data, function (key, val) {
+        //        $('#Categories').append('<option id="' + key + '">' + val + '</option>');
+        //    })
+        //});
+    });
+
+</script>
+
